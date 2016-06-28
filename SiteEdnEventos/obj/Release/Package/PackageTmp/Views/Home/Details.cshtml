@@ -1,0 +1,210 @@
+﻿@model SiteEdnEventos.Models.Eventos
+@{
+    Layout = "";
+    var localEvento = Model.LocalEvento + ", " + Model.NumeroLocalEvento + " - " + Model.CidadeEvento + " (" + Model.BairroEvento + ") ";
+    var titulo = "Evento: " + "'" + Model.NomeEvento + "'" + "|" + " Dia: " + Model.DataEvento.ToString("dd/MM/yyyy");
+    var DataEvento = Model.DataEvento.ToString("dd/MM/yyyy");
+    var horario = Model.Hora.ToString(@"hh\:mm");
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@titulo </title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/main.css" rel="stylesheet">
+    <link href="~/Content/animate.css" rel="stylesheet">
+    <link href="~/Content/creative.css" rel="stylesheet">
+    <link href="~/Content/responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/A ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+<body>
+    <header id="header" role="banner">
+        <div class="main-nav">
+            <div class="container">
+
+                <div class="row">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="http://eventosedn.azurewebsites.net" >
+                            <img class="img-responsive" src="~/images/logo.png" alt="logo">
+                        </a>
+                    </div>
+            
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--/#header-->
+    <section id="home">
+        <div id="main-slider" class="carousel slide" data-ride="carousel">
+
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img class="img-responsive" style="width:1349px;height:758px;" src="~/images/event/@Html.DisplayFor(model => model.ImagemProduto)">
+                    <div class="item">
+
+                        <div class="carousel-caption">
+                            <h1 style="font-size:50px">@Html.DisplayTextFor(model => model.NomeEvento)<br /><a href="https://twitter.com/share" class="twitter-share-button" data-size="large" data-hashtags="EDNEVENTOS"></a></h1>                           
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="services" style="background-color:black">
+        <br /><br /><br /><br />
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading"><b>@Html.DisplayTextFor(model => model.NomeEvento)</b></h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-calendar wow bounceIn text-primary"></i>
+                        <h3><b>DATA DO EVENTO</b></h3>
+                        <p>@DataEvento</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-map-marker wow bounceIn text-primary" data-wow-delay=".1s"></i>
+                        <h3><b>LOCAL DO EVENTO</b></h3>
+                        <p>@localEvento</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-money wow bounceIn text-primary" data-wow-delay=".2s"></i>
+                        <h3><b>Valor do Evento</b></h3>
+                        <p>R$ @Html.DisplayTextFor(model => model.ValorEvento)</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-clock-o wow bounceIn text-primary" data-wow-delay=".3s"></i>
+                        <h3><b>HORARIO DO EVENTO</b></h3>
+                        <p>@horario</p>
+                </div>
+            </div>
+            <br /><br /><br /><br />
+        </div>
+    </section>
+   
+    <section id="services" style="background-color:black">
+        <br /><br />
+        <div hidden>
+            <b hidden>Logradouro:</b><input id="logradouro" type="text" class="form-control" value="@Model.LocalEvento" disabled hidden />
+            <b hidden>Numero</b><input id="numero" type="text" class="form-control" value="@Model.NumeroLocalEvento" disabled hidden />
+            <b hidden>Birro</b><input id="bairro" type="text" class="form-control" value="@Model.BairroEvento" disabled hidden />
+            <b hidden>Cidade</b><input id="cidade" type="text" class="form-control" value="@Model.CidadeEvento" disabled hidden />
+        </div>
+        <div id="map_canvas" class="animated fadeInUp" style="width: 100%; height: 300px ; top: 0px;right:60px;bottom:60px;left: 0px;">
+</section>
+    <footer id="footer">
+        <div class="container">
+            <div class="text-center">
+                <p> Copyright  &copy;2016 EDN Eventos.
+            </div>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="~/Scripts/jquery.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript" src="~/Scripts/gmaps.js"></script>
+    <script type="text/javascript" src="~/Scripts/smoothscroll.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.parallax.js"></script>
+    <script type="text/javascript" src="~/Scripts/coundown-timer.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.scrollTo.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.nav.js"></script>
+    <script type="text/javascript" src="~/Scripts/main.js"></script>
+    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+</body>
+</html>
+<script type="text/javascript" language="javascript">
+
+        var map = null;
+        function chamaMapa() {
+            var latlng = new google.maps.LatLng(-23.64340873969638, -46.730219057147224);
+            var myOptions = {
+                zoom: 15,
+                center: latlng,
+           
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+            map.setCenter(new google.maps.LatLng(-20.7233106, -46.6146444));
+        }
+
+        function abreLink() {
+            window.open('http://www.google.com.br');
+        }
+
+        function FazMarcacao(lat, long) {
+            var latlong = lat + "," + long;
+            var myLatLong = new google.maps.LatLng(-23.64340873969638, -46.730219057147224);
+            map.setZoom(17);
+
+            var marker = new google.maps.Marker({ position: myLatLong, map: map });
+            map.setCenter(myLatLong);
+
+        }
+
+        function chamaMarcacaoEndereco(logradouro, numero, bairro, cidade) {
+            var endereco = logradouro + "," + numero + "," + bairro + "," + cidade;
+            map.setZoom(17);
+            var geoCoder = new google.maps.Geocoder();
+            geoCoder.geocode({ 'address': endereco }, function (results, status) {
+                if (status = google.maps.GeocoderStatus.OK) {
+                    var latlng = results[0].geometry.location;
+                    var marker = new google.maps.Marker({ position: latlng, map: map });
+                    map.setCenter(latlng);
+
+                }
+            })
+
+        }
+        $(document).ready(function () {
+            chamaMapa();
+            chamaMarcacaoEndereco(logradouro.value, numero.value, bairro.value, cidade.value);
+        });
+
+
+
+</script>
+
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.6";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>

@@ -1,0 +1,228 @@
+﻿@model IEnumerable<SiteEdnEventos.Models.Eventos>
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>EDN EVENTOS</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/main.css" rel="stylesheet">
+    <link href="~/Content/animate.css" rel="stylesheet">
+    <link href="~/Content/creative.css" rel="stylesheet">
+    <link href="~/Content/responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/A ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+<body>
+    <header id="header" role="banner">
+        <div class="main-nav">
+            <div class="container">
+
+                <div class="row">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="http://eventosedn.azurewebsites.net" >
+                            <img class="img-responsive" src="images/logo.png" alt="logo">
+                        </a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="scroll active"><a href="#home">INICIO</a></li>
+                            <li class="scroll"><a href="#event">EVENTOS</a></li>
+                            @*<li class="scroll"><a href="#contat">Contato</a></li>*@
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--/#header-->
+    <section id="home">
+        <div id="main-slider" class="carousel slide" data-ride="carousel">
+
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img class="img-responsive" style="width:1349px;height:758px;" src="~/images/event/cielo-balada-new-yorks.jpg">
+                    <div class="item">
+
+              
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="event" style="background-color:black">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-9" style="width:102%">
+                    <div id="event-carousel" class="carousel slide" data-interval="false">
+                        <h2 class="heading">Eventos</h2>
+
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <div class="row">
+                                    @foreach (var item in Model)
+                                    {
+                                        if (item.Status == true && item.DataEvento >= DateTime.Today)
+                                        {
+                                            if (item.DataEvento == DateTime.Today)
+                                            {
+                                                <div>
+                                                    <div class="single-event">
+                                                        <img class="img-responsive" style="width:263px;height:231px" src="images/event/@item.ImagemProduto" alt="event-image">
+                                                        <h4 style="color:green">@item.NomeEvento (HOJE!)</h4>
+                                                        <h5>@item.DataEvento.ToString("dd/MM/yyyy") Ás @item.Hora.ToString(@"hh\:mm")</h5>
+                                                        <a href="http://eventosedn.azurewebsites.net/Home/Details/@item.IdEvento">Ver mais</a>
+                                                    </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+                                                <div class="col-sm-3">
+                                                    <div class="single-event">
+                                                        <img class="img-responsive" style="width:263px;height:231px" src="images/event/@item.ImagemProduto" alt="event-image">
+                                                        <h4>@item.NomeEvento </h4>
+                                                        <h5>@item.DataEvento.ToString("dd/MM/yyyy")  Ás @item.Hora.ToString(@"hh\:mm")</h5>
+                                                        @Html.ActionLink("Ver mais", "Details", new { id = item.IdEvento })
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="single-event">
+                                            <img class="img-responsive" src="images/event/event1.jpg" alt="event-image">
+                                            <h4>Chester Bennington</h4>
+                                            <h5>Vocal</h5>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+  
+    <section id="services" style="background-color:black">
+        <br /><br /><br /><br />
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading"><b>CONTATO</b></h2>
+                    <hr class="primary">
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-envelope wow bounceIn text-primary"></i>
+                        <h3><b>EMAIL</b></h3>
+                        <p>eventosedn@gmail.com </p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-whatsapp wow bounceIn text-primary" data-wow-delay=".1s"></i>
+                        <h3><b>WHATSAPP</b></h3>
+                        <p>( 11 ) 96573 - 4239</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-phone wow bounceIn text-primary" data-wow-delay=".2s"></i>
+                        <h3><b>Telefone</b></h3>
+                        <p>( 11 ) 4675 - 8938</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div class="service-box">
+                        <i class="fa fa-4x fa-instagram wow bounceIn text-primary" data-wow-delay=".3s"></i>
+                        <h3><b>INSTAGRAM</b></h3>
+                        <a href="https://www.instagram.com/edneventos/" target="_blank"><p>EDN EVENTOS</p></a>
+                    </div>
+                </div>
+                <br /><br /><br /><br />
+            </div>
+            <br /><br /><br /><br />
+    </section>
+    <section id="services" style="background-color:black">
+        <br /><br /><br /><br />
+     
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 text-center">
+                    <div  style="margin-left:403px" class="fb-page" data-href="https://www.facebook.com/E.d.n.Producoes.Eventos/info/?entry_point=about_section_header&amp;ref=page_internal" data-tabs="timeline" data-height="1" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/E.d.n.Producoes.Eventos/info/?entry_point=about_section_header&amp;ref=page_internal" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/E.d.n.Producoes.Eventos/info/?entry_point=about_section_header&amp;ref=page_internal">E D N  Eventos</a></blockquote></div>
+                </div>
+
+
+                <br /><br /><br /><br />
+            </div>
+            <br /><br /><br /><br />
+        </div>
+    </section>
+    <footer id="footer">
+        <div class="container">
+            <div class="text-center">
+                <p> Copyright  &copy;2016 EDN Eventos.
+            </div>
+        </div>
+    </footer>
+    <!--/#footer-->
+
+    <script type="text/javascript" src="~/Scripts/jquery.js"></script>
+    <script type="text/javascript" src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+    <script type="text/javascript" src="~/Scripts/gmaps.js"></script>
+    <script type="text/javascript" src="~/Scripts/smoothscroll.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.parallax.js"></script>
+    <script type="text/javascript" src="~/Scripts/coundown-timer.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.scrollTo.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.nav.js"></script>
+    <script type="text/javascript" src="~/Scripts/main.js"></script>
+</body>
+</html>
+
+<div id="fb-root"></div>
+<script>
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/pt_BR/sdk.js#xfbml=1&version=v2.6";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
